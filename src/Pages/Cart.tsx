@@ -12,10 +12,7 @@ import { PaymentModal } from './PaymentModal';
 
 const Cart = () => {
   const [cartitem, setCartitem] = useState<MenuItem[]>([])
-  console.log(cartitem)
-  
-
-  const location = useLocation()
+   const location = useLocation()
   const navigate=useNavigate()
   
   useEffect(()=>{
@@ -67,7 +64,8 @@ const Cart = () => {
   const getSubtotal=()=>{
     return cartitem.reduce((acc,item)=>acc+item.price*item.quantity,0)
   }
- 
+  const gstrate=getSubtotal()*0.05
+  const gettotal=getSubtotal()+gstrate+40
   return (
     <div style={{ width: '100%', height:'100%',  backgroundColor: '#f5f5f5'}}  >
 
@@ -108,10 +106,12 @@ const Cart = () => {
           </Box>
           <Stack sx={{width:'30%',boxShadow:2,borderRadius:4,textAlign:'center',p:4,backgroundColor: '#fff',mb:4}}>
             <Typography>Cart Total</Typography>
-            <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}>  <span>SubTotal: </span> <Typography> ₹{getSubtotal()}</Typography></Box><Divider/>
-              <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}><span>Total: </span> <Typography> ₹{getSubtotal()}</Typography></Box>
+            <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}>  <span>SubTotal: </span> <Typography> ₹{gettotal}</Typography></Box><Divider/>
+              <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}><span>order Total: </span> <Typography> ₹{getSubtotal()}</Typography></Box>
+              <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}><span>Gst: </span> <Typography>₹{gstrate}</Typography></Box>
+              <Box sx={{display:'flex',justifyContent:'space-between',m:2,fontSize:'20px'}}><span>Dellivery charge: </span> <Typography>₹40</Typography></Box>
           
-            <PaymentModal   total={getSubtotal()}/>
+            <PaymentModal />
 
           </Stack>
 

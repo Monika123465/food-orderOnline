@@ -13,6 +13,12 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  FormControl,
+  FormControlLabel,
+  
+  Radio,
+  RadioGroup,
+  Stack,
   TextField,
   Tooltip,
   Typography,
@@ -31,7 +37,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export const PaymentModal = ({ total }: { total: number }) => {
+export const PaymentModal = () => {
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const [card,setCard]=useState({
@@ -43,8 +49,16 @@ export const PaymentModal = ({ total }: { total: number }) => {
     upiId:''
 
   })
+  const [address,setAddress]=useState({
+    houseNo:'',
+    street:'',
+    area:'',
+    city:'',
+    pincode:'',
+    adresslocal:''
+  })
   const navigate=useNavigate()
-  console.log(total)
+  
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -99,8 +113,38 @@ export const PaymentModal = ({ total }: { total: number }) => {
         <Divider />
         <DialogContent>
           <Container>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', m: 2, fontSize: '20px' }}><span>Total: </span> <Typography> ₹{total}</Typography></Box>
-            <Box>
+           
+            <Stack direction={'column'} spacing={2}>
+              <Typography fontSize={'25px'}>Add Delivery Address</Typography>
+              <TextField size='small' label='House no' type='text' fullWidth  onChange={(e)=>setAddress({...address,houseNo:e.target.value})}/>
+              <TextField size='small' label='Street' type='text' fullWidth  onChange={(e)=>setAddress({...address,street:e.target.value})}/>
+              <TextField size='small' label='Area' type='text' fullWidth  onChange={(e)=>setAddress({...address,area:e.target.value})}/>
+              <TextField size='small' label='City' type='text' fullWidth  onChange={(e)=>setAddress({...address,city:e.target.value})}/>
+              <TextField size='small' label='Pincode' type='number' fullWidth  onChange={(e)=>setAddress({...address,pincode:e.target.value})}/>
+
+              <FormControl>
+   
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        onChange={(e)=>setAddress({...address,adresslocal:e.target.value})}
+      >
+        <FormControlLabel value="home" control={<Radio />} label="Home" />
+        <FormControlLabel value="work" control={<Radio />} label="Work" />
+        <FormControlLabel value="other" control={<Radio />} label="Hotel" />
+        <FormControlLabel
+          value=""
+         control={<Radio />}
+          label="other"
+
+        />
+
+      </RadioGroup>
+    </FormControl>
+
+            </Stack>
+            <Box mt={4}>
               <Typography fontSize={'25px'}>How would you like to pay ?</Typography>
 
               <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={{mt:2}}>
