@@ -55,7 +55,9 @@ export const PaymentModal = () => {
     area:'',
     city:'',
     pincode:'',
-    adresslocal:''
+    adresslocal:'',
+    name:'',
+    mobileNo:''
   })
   const navigate=useNavigate()
   
@@ -69,7 +71,7 @@ export const PaymentModal = () => {
     const handleSubmit=()=>{
       if(card.cardNO !=="" || upi.upiId !=="" ){
       window.alert('ORDER PLACED')
-      navigate('/menu')
+      navigate('/orderdetails')
     }else{
       window.alert(' enter details')
     }
@@ -116,6 +118,8 @@ export const PaymentModal = () => {
            
             <Stack direction={'column'} spacing={2}>
               <Typography fontSize={'25px'}>Add Delivery Address</Typography>
+              <TextField size='small' label='Name' type='text' fullWidth onChange={(e)=>setAddress({...address,name:e.target.value})}/>
+                <TextField size='small' label='Mobile no' type='number' fullWidth onChange={(e)=>setAddress({...address,mobileNo:e.target.value})}/>
               <TextField size='small' label='House no' type='text' fullWidth  onChange={(e)=>setAddress({...address,houseNo:e.target.value})}/>
               <TextField size='small' label='Street' type='text' fullWidth  onChange={(e)=>setAddress({...address,street:e.target.value})}/>
               <TextField size='small' label='Area' type='text' fullWidth  onChange={(e)=>setAddress({...address,area:e.target.value})}/>
@@ -142,7 +146,13 @@ export const PaymentModal = () => {
 
       </RadioGroup>
     </FormControl>
+    <Stack spacing={1} mt={4}>
+      <Typography fontSize={'25px'}>or Orders for SomeOne's else </Typography>
+      <TextField size='small' label='Name' type='text' fullWidth onChange={(e)=>setAddress({...address,name:e.target.value})}/>
+        <TextField size='small'  label='phone' type='text' fullWidth onChange={(e)=>setAddress({...address,mobileNo:e.target.value})} />
 
+    </Stack>
+        
             </Stack>
             <Box mt={4}>
               <Typography fontSize={'25px'}>How would you like to pay ?</Typography>

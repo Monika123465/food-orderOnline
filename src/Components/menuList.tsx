@@ -201,3 +201,53 @@ export const menulistItem = [
   },
 
 ]
+
+export const restuarantList = [
+  {
+    id: 1,
+    image: '/assests/vegloadedsandwich.avif',
+    title: 'VegLoadedSandwich',
+    description: 'It is delicious filled with tomato and chilli roasted properly or more generally any dish wherein bread serves as a container.',
+    rating:4.3
+  },
+  {
+    id: 2,
+    image: '/assests/mushroomgarilicsandwich.jpg',
+    title: 'MushroomGariliccSandwich',
+    description: 'It is delicious filled with tomato and chilli roasted properly or more generally any dish wherein bread serves as a containe.',
+    rating:3.9         
+  
+  }]
+
+  export const orderdetails=[
+    {
+      id:1,
+      order_id:'#1976d2',
+      total:'$100',
+      status:'Delivered',
+      address:'433/800 shastri nagar patna 23',
+      date:'12/12/2022',
+      time:'12:00pm'
+    },
+
+    {
+      id:2,
+      order_id:'#1976d3',
+      total:'$200',
+      status:'Delivered',
+      address:'433/800 sudhowala dehradun 23',
+      date:'13/12/2022',
+      time:'2:00pm'
+    },
+
+    {
+      id:3,  
+      order_id:'#1976d4',
+      total:'$300',
+      status:'Delivered',
+      address:'433/800 premnagar dehradun',
+      date:'14/12/2022',
+      time:'2:00pm'
+    }
+
+  ]

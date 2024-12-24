@@ -18,9 +18,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { UserContext } from '../Context/Authcontext';
 
-import Person2Icon from '@mui/icons-material/Person2';
-import { Button } from '@mui/material';
-import { Login } from '@mui/icons-material';
+import { Avatar,  IconButton, Menu, MenuItem, Tooltip, } from '@mui/material';
+
+import FoodBankIcon from '@mui/icons-material/FoodBank';
+// import { Logout } from '@mui/icons-material';
+ 
+
+
+
 
 
 
@@ -44,42 +49,50 @@ const page = [
     icon: <ContactPageIcon/>,
     route: '/contact'
   },
+  {
+    title:'Order ',
+    icon:<FoodBankIcon/>,
+    route:'/orderdetails'
+  }
   
 ]
-
-
-// const settings = [
-//   // 'Profile', 'Account', 'Dashboard', 'Logout'
+ 
+const Profile = [
+  {
+    title: 'Profile',
    
+    route: '/profile'
+  },
+   {
+    title:'Setting',
   
-//   {
-//     title: 'Menu',
-//     icon: <MenuIcon />,
-//     route: '/menu'
-//   },
-//   {
-//     title: 'Cart',
-//     icon: <AddShoppingCartIcon />,
-//     route: "/cart",
+    route:'/setting'
+  },
+  {
+    title: 'Logout',
+    route: '',
+   
+  },
+ 
 
+];
 
-//   },
-//   {
-//     title: 'Contact',
-//     icon: <ContactPageIcon/>,
-//     route: '/contact'
-//   }
-
-// ];
-
+ 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   
  const {user,Logout}=React.useContext(UserContext)
- console.log(user)
-   
-  
+ 
 
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+ 
+  
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -123,14 +136,49 @@ const Navbar = () => {
                   sx={{ my: 2, color: 'white',display:'flex',gap:1, }}
                  
 
-                ><Typography sx={{mt:1}}>{pages.icon}</Typography><Typography sx={{fontSize:'28px',textDecoration: 'none'}} >{pages.title}</Typography></Box></Link>
+                ><Typography sx={{mt:1}}>{pages.icon}</Typography><Typography sx={{fontSize:'28px',textDecoration: 'none'}} >{pages.title}</Typography></Box>
+                </Link>
 
             ))}
           </Box>
-         <Person2Icon/>
-         <Button size='small' variant='outlined' sx={{color:'whitesmoke',backgroundColor:'error'}} onClick={()=>{user ? Logout() : <Login/>}}>
+
+            <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {Profile.map((setting) => (
+                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                 <Link to={setting.route}>
+                 <Typography textAlign="center">{setting.title}</Typography>
+                 </Link>  
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+         {/* <Person2Icon/>
+       
+          <Button size='small' variant='outlined' sx={{color:'whitesmoke',backgroundColor:'error'}} onClick={()=>{user ? Logout() : <Login/>}}>
                             {user ? "LOGOUT" : "LOGIN"}
-                        </Button>
+                        </Button> 
+         */}
         </Toolbar>
             
       </Container>

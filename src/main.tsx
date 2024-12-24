@@ -10,6 +10,9 @@ import Signup from './Pages/Signup.tsx'
 import Cart from './Pages/Cart.tsx'
 import Layout from './Layout.tsx'
 import AuthContextProvider from './Context/Authcontext.tsx'
+import OrderDetails from './Pages/OrderDetails.tsx'
+import Profile from './Pages/Profile.tsx'
+import Setting from './Pages/Setting.tsx'
 
 
 
@@ -49,6 +52,18 @@ const routers = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       },
+       {
+        path: '/orderdetails',
+        element: <OrderDetails />
+      },
+       {
+        path: '/profile',
+        element: <Profile />
+      },
+      {
+        path:'/setting',
+        element:<Setting/>
+      }
       
     ]
   }
